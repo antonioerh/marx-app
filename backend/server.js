@@ -47,7 +47,9 @@ function readDate(value, name) {
 
 function createApp({
   fetchImpl = globalThis.fetch,
-  token = process.env.BRAPI_API_KEY || process.env.BRAPI_TOKEN || "",
+  // API_KEY is kept for compatibility with the existing .env file.  Prefer the
+  // explicit BRAPI_API_KEY name for new deployments.
+  token = process.env.BRAPI_API_KEY || process.env.BRAPI_TOKEN || process.env.API_KEY || "",
   baseUrl = process.env.BRAPI_BASE_URL || BRAPI_URL,
   corsOrigins = (process.env.CORS_ORIGINS || "").split(",").map((origin) => origin.trim()).filter(Boolean),
 } = {}) {

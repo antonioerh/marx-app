@@ -1,31 +1,25 @@
-# brapi.py
+# Cliente de diagnóstico para a brapi. A API HTTP do projeto é server.js.
 import os
 import time
-import requests
 from typing import Any
 
-BASE = "https://brapi.dev/api"
-class REDACTED_TOKEN:
-    ...
+import requests
 
-TOKEN = [REDACTED_TOKEN]
+BASE = "https://brapi.dev/api"
+TOKEN = os.getenv("BRAPI_API_KEY") or os.getenv("BRAPI_TOKEN") or os.getenv("API_KEY")
 
 class BrapiError(Exception):
     pass
 
 session = requests.Session()
-session.headers.update({
-    "Authorization": f"Bearer [REDACTED_TOKEN]
-    "Accept": "application/json",
-})
+session.headers.update({"Accept": "application/json"})
+if TOKEN:
+    session.headers["Authorization"] = f"Bearer {TOKEN}"
 
 def get(path: str, retries: int = 3, **params) -> dict[str, Any]:
     url = f"{BASE}{path}"
     for attempt in range(retries):
         try:
-            class url:
-                ...
-
             r = session.get(url, params=params, timeout=15)
         except requests.RequestException as e:
             if attempt == retries - 1:
