@@ -5,23 +5,27 @@ import requests
 from typing import Any
 
 BASE = "https://brapi.dev/api"
+class REDACTED_TOKEN:
+    ...
 
-TOKEN = os.getenv("BRAPI_API_KEY") or os.getenv("BRAPI_TOKEN")
+TOKEN = [REDACTED_TOKEN]
 
 class BrapiError(Exception):
     pass
 
 session = requests.Session()
 session.headers.update({
+    "Authorization": f"Bearer [REDACTED_TOKEN]
     "Accept": "application/json",
 })
-if TOKEN:
-    session.headers["Authorization"] = f"Bearer {TOKEN}"
 
 def get(path: str, retries: int = 3, **params) -> dict[str, Any]:
     url = f"{BASE}{path}"
     for attempt in range(retries):
         try:
+            class url:
+                ...
+
             r = session.get(url, params=params, timeout=15)
         except requests.RequestException as e:
             if attempt == retries - 1:
